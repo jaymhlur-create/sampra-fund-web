@@ -1,20 +1,25 @@
 'use client'
 
+import { useRouter } from "next/navigation";
 import { useState } from 'react'
 import { signIn } from '@/src/lib/auth'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const router = useRouter()
 
   const handleLogin = async () => {
     try {
-      await signIn(email, password)
-      alert('Logged in!')
+      await signIn(email, password);
+
+      // ✅ correct redirect
+      router.replace("/dashboard");
+
     } catch (error) {
-      alert(error instanceof Error ? error.message : 'Login failed')
+      alert(error instanceof Error ? error.message : "Login failed");
     }
-  }
+  };
 
   return (
     <div className="flex h-screen items-center justify-center">
