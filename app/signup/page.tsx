@@ -1,20 +1,39 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { signUp } from '@/src/lib/auth'
+import { useState, useEffect } from "react";
+import { signUp } from "@/src/lib/auth";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/src/context/AuthContext";
 
 export default function SignupPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  // ✅ Prevent logged-in users from seeing signup
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace("/dashboard");
+    }
+  }, [user, loading, router]);
 
   const handleSignup = async () => {
     try {
-      await signUp(email, password)
-      alert('Check your email for confirmation!')
+      await signUp(email, password);
+
+      alert("Check your email for confirmation!");
+
+      // ⚠️ Only redirect if email confirmation is OFF
+      // router.replace("/dashboard");
+
     } catch (error) {
-      alert(error instanceof Error ? error.message : 'Signup failed')
+      alert(error instanceof Error ? error.message : "Signup failed");
     }
-  }
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (user) return null;
 
   return (
     <div className="flex h-screen items-center justify-center">
@@ -43,5 +62,5 @@ export default function SignupPage() {
         </button>
       </div>
     </div>
-  )
+  );
 }

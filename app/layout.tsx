@@ -1,8 +1,22 @@
 
+/**
+ * Root Layout
+ * Structure: Route Groups for clean organization
+ * 
+ * Directory structure (note: route groups don't affect URLs):
+ * app/(auth)/login → /login
+ * app/(auth)/signup → /signup
+ * app/(protected)/dashboard → /dashboard
+ * app/page.tsx → /
+ * 
+ * AuthProvider wraps all routes at root level to ensure
+ * authentication context is available throughout the app.
+ */
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "../src/context/AuthContext"; // ✅ ADD THIS
+import { AuthProvider } from "../src/context/AuthContext"; // ✅ Wraps all app routes
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
