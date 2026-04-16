@@ -28,18 +28,18 @@ export default function Step6Uploads({ data, onChange }: Step6UploadsProps) {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white mb-6">Document Uploads</h2>
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">Document Uploads</h2>
 
       {/* Applicant ID Document */}
       <div>
-        <label className="block text-sm font-medium text-slate-200 mb-2">
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
           Applicant ID / Passport Document *
         </label>
         <div className="relative">
           <input
             type="file"
             onChange={(e) => onChange({ applicant_id_document: e.target.files?.[0] || null })}
-            className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-600 file:text-white cursor-pointer hover:border-blue-500 transition-all"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-yellow-400 file:text-gray-900 cursor-pointer hover:border-blue-500 transition-all"
             accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
           />
           {data.applicant_id_document && (
@@ -48,14 +48,14 @@ export default function Step6Uploads({ data, onChange }: Step6UploadsProps) {
             </p>
           )}
         </div>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-xs text-gray-400 mt-1">
           Accepted formats: PDF, JPG, PNG, DOC, DOCX
         </p>
       </div>
 
       {/* Additional Documents */}
       <div>
-        <label className="block text-sm font-medium text-slate-200 mb-2">
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
           Additional Documents (Optional)
         </label>
         <div className="relative">
@@ -63,24 +63,24 @@ export default function Step6Uploads({ data, onChange }: Step6UploadsProps) {
             type="file"
             multiple
             onChange={(e) => handleAdditionalDocuments(e.target.files)}
-            className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-600 file:text-white cursor-pointer hover:border-blue-500 transition-all"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-yellow-400 file:text-gray-900 cursor-pointer hover:border-blue-500 transition-all"
             accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
           />
         </div>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-xs text-gray-400 mt-1">
           You can upload multiple files at once
         </p>
 
         {/* List of additional documents */}
         {data.additional_documents.length > 0 && (
           <div className="mt-4 space-y-2">
-            <p className="text-sm font-medium text-slate-300">Uploaded Documents:</p>
+            <p className="text-sm font-medium text-gray-300">Uploaded Documents:</p>
             {data.additional_documents.map((doc, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between p-3 bg-slate-700/30 border border-slate-600/50 rounded-lg"
+                className="flex items-center justify-between p-3 bg-gray-700/30 border border-slate-600/50 rounded-lg"
               >
-                <span className="text-sm text-slate-300 truncate">📎 {doc.name}</span>
+                <span className="text-sm text-gray-300 truncate">📎 {doc.name}</span>
                 <button
                   onClick={() => handleRemoveAdditionalDoc(index)}
                   className="text-xs text-red-400 hover:text-red-300 font-medium"

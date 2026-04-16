@@ -1,26 +1,111 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================================
+   SAMPRA DEVELOPMENT FUND - GLOBAL DESIGN SYSTEM
+   ============================================================================
+   
+   This file defines the global styles and design tokens for the entire
+   application. All components should derive their styling from the design
+   system defined here and in tailwind.config.js
+   
+   Color Palette:
+   - Primary Brand: Yellow (#FEC838, #F59E0B, #FCD34D)
+   - Neutrals: Gray-50 to Gray-900
+   - Semantic: Green (success), Red (danger), Blue (info), Amber (warning)
+   
+   Typography: Geist Sans (system fonts fallback)
+   
+   Spacing: Base unit 4px (tw-spacing scale)
+   
+   =========================================================================== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Design System Colors - SAMPRA Development Fund */
+:root {
+  /* Primary Colors */
+  --color-primary-yellow: #FEC838;
+  --color-primary-yellow-dark: #F59E0B;
+  --color-primary-yellow-light: #FCD34D;
+  
+  /* Backgrounds */
+  --background: #ffffff;
+  --background-secondary: #f9fafb;
+  --background-tertiary: #f3f4f6;
+  
+  /* Text */
+  --foreground: #111827;
+  --foreground-secondary: #4b5563;
+  --foreground-tertiary: #9ca3af;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1f2937;
+    --background-secondary: #111827;
+    --background-tertiary: #0f172a;
+    --foreground: #f9fafb;
+    --foreground-secondary: #d1d5db;
+    --foreground-tertiary: #9ca3af;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+/* Global Form Styling */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  @apply w-full px-4 py-2.5 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 
+         focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-200 
+         transition-all duration-200;
+}
+
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="password"]:disabled,
+select:disabled,
+textarea:disabled {
+  @apply bg-gray-50 text-gray-500 cursor-not-allowed opacity-60;
+}
+
+/* Global Button Styling - Primary (Yellow) */
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-3 bg-yellow-400 hover:bg-yellow-500 
+         text-gray-900 font-bold rounded-full transition-all duration-200 
+         shadow-sm hover:shadow-md whitespace-nowrap;
+}
+
+.btn-primary:active {
+  @apply scale-95;
+}
+
+/* Global Button Styling - Secondary (Bordered) */
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-6 py-3 border-2 border-gray-900 
+         text-gray-900 font-bold rounded-full hover:bg-gray-900 hover:text-white 
+         transition-all duration-200 whitespace-nowrap;
+}
+
+/* Global Button Styling - Tertiary (Ghost) */
+.btn-tertiary {
+  @apply inline-flex items-center justify-center px-4 py-2 text-gray-900 font-semibold 
+         hover:text-yellow-400 transition-colors duration-200 whitespace-nowrap;
+}
+
+/* Loading Spinner */
+.spinner {
+  @apply animate-spin rounded-full border-4 border-gray-200 border-t-yellow-400;
 }

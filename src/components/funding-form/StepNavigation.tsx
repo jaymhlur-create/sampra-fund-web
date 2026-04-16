@@ -16,7 +16,7 @@ export default function StepNavigation({ currentStep, onStepClick }: StepNavigat
     <div className="mb-8">
       {/* Mobile progress text */}
       <div className="md:hidden mb-4">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-gray-600 font-semibold">
           Step {currentStep} of {STEPS.length}
         </p>
       </div>
@@ -34,14 +34,14 @@ export default function StepNavigation({ currentStep, onStepClick }: StepNavigat
                 onClick={() => onStepClick(step.number)}
                 disabled={currentStep < step.number}
                 className={`
-                  flex items-center justify-center w-10 h-10 rounded-full font-semibold text-sm
+                  flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm
                   transition-all duration-200 flex-shrink-0
                   ${
                     isCurrent
-                      ? 'bg-blue-600 text-white shadow-lg'
+                      ? 'bg-yellow-400 text-gray-900 shadow-lg'
                       : isCompleted
-                      ? 'bg-green-600 text-white cursor-pointer hover:bg-green-700'
-                      : 'bg-slate-700 text-slate-400 cursor-not-allowed opacity-50'
+                      ? 'bg-green-500 text-white cursor-pointer hover:bg-green-600'
+                      : 'bg-gray-200 text-gray-500 cursor-not-allowed opacity-50'
                   }
                 `}
                 title={`${step.name}: ${step.description}`}
@@ -60,10 +60,10 @@ export default function StepNavigation({ currentStep, onStepClick }: StepNavigat
                     h-1 flex-1 mx-1
                     ${
                       isCompleted
-                        ? 'bg-green-600'
+                        ? 'bg-green-500'
                         : isCurrent
-                        ? 'bg-blue-600'
-                        : 'bg-slate-600'
+                        ? 'bg-yellow-400'
+                        : 'bg-gray-200'
                     }
                   `}
                 />
@@ -76,10 +76,10 @@ export default function StepNavigation({ currentStep, onStepClick }: StepNavigat
       {/* Desktop step labels */}
       <div className="hidden md:flex gap-4 mt-6">
         <div className="flex-1">
-          <p className="text-sm font-medium text-slate-300">
+          <p className="text-sm font-bold text-gray-900">
             {STEPS[currentStep - 1].name}
           </p>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-gray-600">
             {STEPS[currentStep - 1].description}
           </p>
         </div>

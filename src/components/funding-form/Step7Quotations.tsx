@@ -56,7 +56,7 @@ export default function Step7Quotations({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white mb-6">Budget Quotations</h2>
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">Budget Quotations</h2>
 
       {/* Info Box */}
       <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
@@ -70,17 +70,17 @@ export default function Step7Quotations({
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="border-b border-slate-600">
-            <tr className="bg-slate-700/30">
-              <th className="px-4 py-3 text-left text-sm font-medium text-slate-300">
+            <tr className="bg-gray-700/30">
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-300">
                 Quotation Name
               </th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-slate-300">
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-300">
                 Amount (ZAR)
               </th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-slate-300">
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-300">
                 Document
               </th>
-              <th className="px-4 py-3 text-center text-sm font-medium text-slate-300">
+              <th className="px-4 py-3 text-center text-sm font-medium text-gray-300">
                 Action
               </th>
             </tr>
@@ -88,13 +88,13 @@ export default function Step7Quotations({
           <tbody className="divide-y divide-slate-600/50">
             {quotations.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-4 py-8 text-center text-slate-400">
+                <td colSpan={4} className="px-4 py-8 text-center text-gray-400">
                   No quotations added yet. Click "Add Quotation" to get started.
                 </td>
               </tr>
             ) : (
               quotations.map((quotation) => (
-                <tr key={quotation.id} className="hover:bg-slate-700/20 transition-colors">
+                <tr key={quotation.id} className="hover:bg-gray-700/20 transition-colors">
                   {/* Name Input */}
                   <td className="px-4 py-3">
                     <input
@@ -104,14 +104,14 @@ export default function Step7Quotations({
                         onUpdateQuotation(quotation.id, { quotation_name: e.target.value })
                       }
                       placeholder="e.g., PA System Rental"
-                      className="w-full px-3 py-2 bg-slate-700/50 border border-slate-600 rounded text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-200 rounded text-white placeholder-gray-500 text-sm focus:outline-none focus:border-blue-500"
                     />
                   </td>
 
                   {/* Amount Input */}
                   <td className="px-4 py-3">
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium pointer-events-none">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium pointer-events-none">
                         R
                       </span>
                       <input
@@ -124,7 +124,7 @@ export default function Step7Quotations({
                           });
                         }}
                         placeholder="0.00"
-                        className="w-full pl-8 pr-3 py-2 bg-slate-700/50 border border-slate-600 rounded text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500"
+                        className="w-full pl-8 pr-3 py-2 border border-gray-200 rounded text-white placeholder-gray-500 text-sm focus:outline-none focus:border-blue-500"
                       />
                     </div>
                   </td>
@@ -139,7 +139,7 @@ export default function Step7Quotations({
                             quotation_file: e.target.files?.[0] || null,
                           })
                         }
-                        className="text-xs file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-medium file:bg-blue-600 file:text-white cursor-pointer"
+                        className="text-xs file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-medium file:bg-yellow-400 file:text-gray-900 cursor-pointer"
                         accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
                       />
                       {quotation.quotation_file && (
@@ -167,8 +167,8 @@ export default function Step7Quotations({
       </div>
 
       {/* Total Row */}
-      <div className="bg-slate-700/50 border border-slate-600 rounded-lg p-4 flex items-center justify-between">
-        <span className="text-lg font-semibold text-slate-200">Total Budget:</span>
+      <div className="border border-gray-200 rounded-lg p-4 flex items-center justify-between">
+        <span className="text-lg font-semibold text-gray-200">Total Budget:</span>
         <span className="text-2xl font-bold text-blue-400">
           R {total.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </span>

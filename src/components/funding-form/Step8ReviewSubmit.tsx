@@ -34,7 +34,7 @@ export default function Step8ReviewSubmit({
     title: string;
     children: React.ReactNode;
   }) => (
-    <div className="bg-slate-700/30 border border-slate-600/50 rounded-lg p-6 mb-4">
+    <div className="bg-gray-700/30 border border-slate-600/50 rounded-lg p-6 mb-4">
       <div className="flex items-start justify-between mb-4">
         <h3 className="text-lg font-semibold text-white">{title}</h3>
         <button
@@ -50,8 +50,8 @@ export default function Step8ReviewSubmit({
 
   const ReviewItem = ({ label, value }: { label: string; value: any }) => (
     <div className="flex justify-between py-2 border-b border-slate-600/30">
-      <span className="text-slate-400">{label}:</span>
-      <span className="text-slate-200 font-medium">
+      <span className="text-gray-400">{label}:</span>
+      <span className="text-gray-200 font-medium">
         {value === null || value === undefined || value === ''
           ? '—'
           : typeof value === 'boolean'
@@ -65,7 +65,7 @@ export default function Step8ReviewSubmit({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white mb-6">Review Your Application</h2>
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">Review Your Application</h2>
 
       {/* Step 1 - Applicant Info */}
       <ReviewSection step={1} title="Applicant Information">
@@ -111,26 +111,26 @@ export default function Step8ReviewSubmit({
       <ReviewSection step={5} title="Project Information">
         <div className="space-y-3">
           <div>
-            <p className="text-sm text-slate-400 font-medium">About You:</p>
-            <p className="text-slate-200 text-sm mt-1">{data.step5.about_applicant || '—'}</p>
+            <p className="text-sm text-gray-400 font-medium">About You:</p>
+            <p className="text-gray-200 text-sm mt-1">{data.step5.about_applicant || '—'}</p>
           </div>
           <div>
-            <p className="text-sm text-slate-400 font-medium">Project Concept:</p>
-            <p className="text-slate-200 text-sm mt-1">{data.step5.project_concept || '—'}</p>
+            <p className="text-sm text-gray-400 font-medium">Project Concept:</p>
+            <p className="text-gray-200 text-sm mt-1">{data.step5.project_concept || '—'}</p>
           </div>
           <div>
-            <p className="text-sm text-slate-400 font-medium">Previous Experience:</p>
-            <p className="text-slate-200 text-sm mt-1">
+            <p className="text-sm text-gray-400 font-medium">Previous Experience:</p>
+            <p className="text-gray-200 text-sm mt-1">
               {data.step5.previous_events_history || '—'}
             </p>
           </div>
           <div>
-            <p className="text-sm text-slate-400 font-medium">Project Timeline:</p>
-            <p className="text-slate-200 text-sm mt-1">{data.step5.project_timeline || '—'}</p>
+            <p className="text-sm text-gray-400 font-medium">Project Timeline:</p>
+            <p className="text-gray-200 text-sm mt-1">{data.step5.project_timeline || '—'}</p>
           </div>
           <div>
-            <p className="text-sm text-slate-400 font-medium">Marketing Plan & ROI:</p>
-            <p className="text-slate-200 text-sm mt-1">{data.step5.marketing_plan_roi || '—'}</p>
+            <p className="text-sm text-gray-400 font-medium">Marketing Plan & ROI:</p>
+            <p className="text-gray-200 text-sm mt-1">{data.step5.marketing_plan_roi || '—'}</p>
           </div>
         </div>
       </ReviewSection>
@@ -138,7 +138,7 @@ export default function Step8ReviewSubmit({
       {/* Step 6 - Documents */}
       <ReviewSection step={6} title="Documents">
         {data.step6.applicant_id_document ? (
-          <p className="text-slate-200 text-sm">
+          <p className="text-gray-200 text-sm">
             📎 ID Document: <span className="font-medium">{data.step6.applicant_id_document.name}</span>
           </p>
         ) : (
@@ -146,8 +146,8 @@ export default function Step8ReviewSubmit({
         )}
         {data.step6.additional_documents.length > 0 && (
           <div className="mt-3">
-            <p className="text-slate-400 text-sm font-medium">Additional Documents:</p>
-            <ul className="text-slate-300 text-sm mt-1 space-y-1">
+            <p className="text-gray-400 text-sm font-medium">Additional Documents:</p>
+            <ul className="text-gray-300 text-sm mt-1 space-y-1">
               {data.step6.additional_documents.map((doc, idx) => (
                 <li key={idx}>📎 {doc.name}</li>
               ))}
@@ -159,7 +159,7 @@ export default function Step8ReviewSubmit({
       {/* Step 7 - Quotations */}
       <ReviewSection step={7} title="Budget Quotations">
         {data.step7.quotations.length === 0 ? (
-          <p className="text-slate-300 text-sm italic">No quotations added</p>
+          <p className="text-gray-300 text-sm italic">No quotations added</p>
         ) : (
           <>
             <div className="space-y-2">
@@ -168,8 +168,8 @@ export default function Step8ReviewSubmit({
                   key={q.id}
                   className="flex items-center justify-between py-2 border-b border-slate-600/30"
                 >
-                  <span className="text-slate-300">{q.quotation_name || 'Unnamed'}</span>
-                  <span className="text-slate-200 font-medium">
+                  <span className="text-gray-300">{q.quotation_name || 'Unnamed'}</span>
+                  <span className="text-gray-200 font-medium">
                     R {Number(q.quotation_amount).toLocaleString('en-ZA', {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
@@ -178,7 +178,7 @@ export default function Step8ReviewSubmit({
                 </div>
               ))}
             </div>
-            <div className="flex items-center justify-between py-3 bg-slate-700/50 px-3 rounded -mx-6 px-6 mt-4">
+            <div className="flex items-center justify-between py-3 bg-gray-700/50 px-3 rounded -mx-6 px-6 mt-4">
               <span className="text-white font-semibold">Total Budget:</span>
               <span className="text-xl font-bold text-blue-400">
                 R {quotationTotal.toLocaleString('en-ZA', {

@@ -12,15 +12,15 @@ interface Step5ProjectInfoProps {
  * Collect detailed project information via textareas
  */
 export default function Step5ProjectInfo({ data, onChange }: Step5ProjectInfoProps) {
-  const textareaClass = "w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none";
+  const textareaClass = "w-full px-4 py-3 border border-gray-200 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-200 transition-all resize-none";
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white mb-6">Project Information</h2>
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">Project Information</h2>
 
       {/* About Applicant */}
       <div>
-        <label className="block text-sm font-medium text-slate-200 mb-2">
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
           About You / Your Organization *
         </label>
         <textarea
@@ -34,7 +34,7 @@ export default function Step5ProjectInfo({ data, onChange }: Step5ProjectInfoPro
 
       {/* Project Concept */}
       <div>
-        <label className="block text-sm font-medium text-slate-200 mb-2">
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
           Project Concept / Description *
         </label>
         <textarea
@@ -48,7 +48,7 @@ export default function Step5ProjectInfo({ data, onChange }: Step5ProjectInfoPro
 
       {/* Previous Events History */}
       <div>
-        <label className="block text-sm font-medium text-slate-200 mb-2">
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
           Previous Events / Experience History *
         </label>
         <textarea
@@ -62,7 +62,7 @@ export default function Step5ProjectInfo({ data, onChange }: Step5ProjectInfoPro
 
       {/* Project Timeline */}
       <div>
-        <label className="block text-sm font-medium text-slate-200 mb-2">
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
           Project Timeline / Implementation Plan *
         </label>
         <textarea
@@ -76,7 +76,7 @@ export default function Step5ProjectInfo({ data, onChange }: Step5ProjectInfoPro
 
       {/* Marketing Plan & ROI */}
       <div>
-        <label className="block text-sm font-medium text-slate-200 mb-2">
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
           Marketing Plan & Expected ROI *
         </label>
         <textarea

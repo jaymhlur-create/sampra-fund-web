@@ -426,39 +426,39 @@ export default function ApplicationDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+    <div className="min-h-screen bg-white p-6">
       {/* Header */}
       <div className="mb-8">
         <Link
           href="/admin/applications"
-          className="text-blue-400 hover:text-blue-300 text-sm mb-4 inline-block"
+          className="text-yellow-500 hover:text-yellow-600 text-sm mb-4 inline-block font-medium transition-colors"
         >
           ← Back to Applications List
         </Link>
-        <h1 className="text-4xl font-bold text-white">Application Review Control Center</h1>
-        <p className="text-slate-400 mt-2">Manage and process funding applications</p>
+        <h1 className="text-4xl font-bold text-gray-900">Application Review Control Center</h1>
+        <p className="text-gray-600 mt-2">Manage and process funding applications</p>
       </div>
 
       {/* Global Messages */}
       {error && (
-        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-          <p className="text-red-300 text-sm">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-700 text-sm">
             <span className="font-semibold">Error:</span> {error}
           </p>
         </div>
       )}
 
       {updateError && (
-        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-          <p className="text-red-300 text-sm">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-700 text-sm">
             <span className="font-semibold">Update Error:</span> {updateError}
           </p>
         </div>
       )}
 
       {successMessage && (
-        <div className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
-          <p className="text-green-300 text-sm">{successMessage}</p>
+        <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+          <p className="text-green-700 text-sm">{successMessage}</p>
         </div>
       )}
 
@@ -466,10 +466,8 @@ export default function ApplicationDetailPage() {
       {loading ? (
         <div className="flex items-center justify-center py-20">
           <div className="text-center">
-            <div className="inline-block animate-spin">
-              <div className="w-12 h-12 border-4 border-slate-600 border-t-blue-500 rounded-full"></div>
-            </div>
-            <p className="text-slate-400 mt-4">Loading application details...</p>
+            <div className="spinner mx-auto mb-4"></div>
+            <p className="text-gray-600 mt-4">Loading application details...</p>
           </div>
         </div>
       ) : application ? (
@@ -477,11 +475,11 @@ export default function ApplicationDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* LEFT: Applicant Info Panel (1 column) */}
           <div className="lg:col-span-1">
-            <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 p-6 space-y-6 sticky top-6">
+            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 space-y-6 sticky top-6">
               {/* Status Badge */}
               <div className="text-center">
                 <span
-                  className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${getStatusColor(
+                  className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${getStatusColor(
                     application.status
                   )}`}
                 >
@@ -491,16 +489,16 @@ export default function ApplicationDetailPage() {
 
               {/* Application ID */}
               <div>
-                <p className="text-slate-400 text-xs font-medium uppercase tracking-wider mb-2">
+                <p className="text-gray-600 text-xs font-medium uppercase tracking-wider mb-2">
                   Application ID
                 </p>
                 <div className="flex items-center gap-2">
-                  <code className="flex-1 text-blue-300 font-mono text-sm bg-slate-900/50 px-3 py-2 rounded-lg break-all">
+                  <code className="flex-1 text-gray-900 font-mono text-sm bg-gray-50 px-3 py-2 rounded-lg break-all border border-gray-200">
                     {shortenId(application.id)}
                   </code>
                   <button
                     onClick={() => copyToClipboard(application.id)}
-                    className="text-slate-400 hover:text-blue-300 transition-colors"
+                    className="text-gray-600 hover:text-yellow-500 transition-colors"
                     title="Copy full ID"
                   >
                     📋
@@ -510,30 +508,30 @@ export default function ApplicationDetailPage() {
 
               {/* User ID */}
               <div>
-                <p className="text-slate-400 text-xs font-medium uppercase tracking-wider mb-2">
+                <p className="text-gray-600 text-xs font-medium uppercase tracking-wider mb-2">
                   User ID
                 </p>
-                <code className="text-slate-300 font-mono text-sm bg-slate-900/50 px-3 py-2 rounded-lg break-all block">
+                <code className="text-gray-700 font-mono text-sm bg-gray-50 px-3 py-2 rounded-lg break-all block border border-gray-200">
                   {application.user_id.substring(0, 8)}...
                 </code>
               </div>
 
               {/* Total Budget */}
-              <div className="border-t border-slate-700/50 pt-6">
-                <p className="text-slate-400 text-xs font-medium uppercase tracking-wider mb-2">
+              <div className="border-t border-gray-200 pt-6">
+                <p className="text-gray-600 text-xs font-medium uppercase tracking-wider mb-2">
                   Budget Total
                 </p>
-                <p className="text-2xl font-bold text-blue-300">
+                <p className="text-2xl font-bold text-gray-900">
                   {formatCurrency(application.total_budget)}
                 </p>
               </div>
 
               {/* Submission Date */}
               <div>
-                <p className="text-slate-400 text-xs font-medium uppercase tracking-wider mb-2">
+                <p className="text-gray-600 text-xs font-medium uppercase tracking-wider mb-2">
                   Submitted
                 </p>
-                <p className="text-slate-300 text-sm">
+                <p className="text-gray-700 text-sm">
                   {formatDate(application.created_at)}
                 </p>
               </div>
@@ -545,9 +543,9 @@ export default function ApplicationDetailPage() {
             {parseApplicationData(application.application_data).map((section, idx) => (
               <div
                 key={idx}
-                className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 p-8"
+                className="bg-white rounded-lg border border-gray-100 shadow-sm p-8"
               >
-                <h2 className="text-xl font-bold text-white mb-6">{section.title}</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-6">{section.title}</h2>
 
                 {section.isQuotations ? (
                   /* Quotations Display with Enhanced SaaS Cards */
@@ -556,42 +554,42 @@ export default function ApplicationDetailPage() {
                       section.quotations.map((quote: any, qidx: number) => (
                         <div
                           key={qidx}
-                          className="bg-slate-800/60 rounded-xl p-5 border border-slate-700 hover:border-blue-500/50 hover:bg-slate-800/80 transition-all duration-200"
+                          className="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-200"
                         >
                           {/* Header: Title + Amount */}
                           <div className="flex justify-between items-start gap-3 mb-4">
                             <div className="flex-1">
-                              <h3 className="font-semibold text-white text-lg">
+                              <h3 className="font-semibold text-gray-900 text-lg">
                                 {quote?.quotation_name || `Quotation ${qidx + 1}`}
                               </h3>
                               {quote?.vendor_name && (
-                                <p className="text-sm text-slate-400 mt-1">Vendor: {quote.vendor_name}</p>
+                                <p className="text-sm text-gray-600 mt-1">Vendor: {quote.vendor_name}</p>
                               )}
                             </div>
-                            <p className="text-lg font-bold text-blue-300 whitespace-nowrap">
+                            <p className="text-lg font-bold text-gray-900 whitespace-nowrap">
                               {formatCurrency(quote?.quotation_amount || 0)}
                             </p>
                           </div>
 
                           {/* Description */}
                           {quote?.description && (
-                            <p className="text-sm text-slate-300 mb-4 bg-slate-900/30 p-3 rounded-lg">
+                            <p className="text-sm text-gray-700 mb-4 bg-white p-3 rounded-lg border border-gray-200">
                               {quote.description}
                             </p>
                           )}
 
                           {/* File Preview and Buttons */}
                           {(quote?.quotation_file || quote?.file?.url) && (
-                            <div className="mb-4 bg-slate-900/50 rounded-lg p-3 border border-slate-600/50">
+                            <div className="mb-4 bg-white rounded-lg p-3 border border-gray-200">
                               <div className="flex items-center gap-2 mb-3">
-                                <span className="text-sm font-medium text-slate-300">📎 Attached File:</span>
-                                <span className="text-xs px-2 py-1 bg-slate-700 text-slate-300 rounded uppercase">
+                                <span className="text-sm font-medium text-gray-700">📎 Attached File:</span>
+                                <span className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded uppercase border border-gray-200">
                                   {getFileType(
                                     quote?.quotation_file?.name || quote?.file?.name || 'file'
                                   )}
                                 </span>
                               </div>
-                              <p className="text-sm text-slate-400 truncate mb-3" title={quote?.quotation_file?.name || quote?.file?.name}>
+                              <p className="text-sm text-gray-600 truncate mb-3" title={quote?.quotation_file?.name || quote?.file?.name}>
                                 {quote?.quotation_file?.name || quote?.file?.name || 'Quotation File'}
                               </p>
                               <div className="flex gap-2">
@@ -599,7 +597,7 @@ export default function ApplicationDetailPage() {
                                   onClick={() => handleViewFile(
                                     quote?.quotation_file || quote?.file || { name: 'quotation', url: quote?.file?.url }
                                   )}
-                                  className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg transition-colors"
+                                  className="flex-1 px-3 py-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 text-xs font-semibold rounded-lg transition-colors"
                                 >
                                   👁️ View
                                 </button>
@@ -607,7 +605,7 @@ export default function ApplicationDetailPage() {
                                   onClick={() => handleDownload(
                                     quote?.quotation_file || quote?.file || { name: 'quotation', url: quote?.file?.url }
                                   )}
-                                  className="flex-1 px-3 py-2 bg-slate-600 hover:bg-slate-500 text-white text-xs font-semibold rounded-lg transition-colors"
+                                  className="flex-1 px-3 py-2 bg-gray-200 hover:bg-gray-300 text-gray-900 text-xs font-semibold rounded-lg transition-colors"
                                 >
                                   ⬇️ Download
                                 </button>
@@ -616,13 +614,13 @@ export default function ApplicationDetailPage() {
                           )}
 
                           {/* Footer: Reference */}
-                          <div className="text-xs text-slate-500 pt-3 border-t border-slate-700/50">
+                          <div className="text-xs text-gray-500 pt-3 border-t border-gray-200">
                             Reference: Quotation #{qidx + 1}
                           </div>
                         </div>
                       ))
                     ) : (
-                      <div className="text-center py-8 bg-slate-900/30 rounded-lg border border-slate-700/50 text-slate-400">
+                      <div className="text-center py-8 bg-gray-50 rounded-lg border border-gray-200 text-gray-600">
                         <p>No quotations found</p>
                       </div>
                     )}
@@ -631,9 +629,9 @@ export default function ApplicationDetailPage() {
                   /* Regular Fields Display */
                   <div className="space-y-4">
                     {section.items && section.items.map((item: any, iidx: number) => (
-                      <div key={iidx} className="flex justify-between items-start py-3 border-b border-slate-700/30 last:border-0">
-                        <span className="text-slate-400 text-sm font-medium">{item.label}</span>
-                        <span className="text-right text-white font-medium max-w-xs">
+                      <div key={iidx} className="flex justify-between items-start py-3 border-b border-gray-200 last:border-0">
+                        <span className="text-gray-700 text-sm font-medium">{item.label}</span>
+                        <span className="text-right text-gray-900 font-medium max-w-xs">
                           {item.value || '—'}
                         </span>
                       </div>
@@ -645,20 +643,20 @@ export default function ApplicationDetailPage() {
 
             {/* Attachments & Quotations Viewer */}
             {collectAttachments().length > 0 && (
-              <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 p-8">
-                <h2 className="text-xl font-bold text-white mb-6">📎 Attachments & Files</h2>
+              <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-8">
+                <h2 className="text-xl font-bold text-gray-900 mb-6">📎 Attachments & Files</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {collectAttachments().map((file: any, idx: number) => (
                     <div
                       key={idx}
-                      className="bg-slate-700/30 rounded-xl p-4 border border-slate-600/50 hover:border-slate-500/50 hover:bg-slate-700/40 transition-all duration-200"
+                      className="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-200"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-white truncate" title={file.name}>
+                          <p className="font-semibold text-gray-900 truncate" title={file.name}>
                             {file.name}
                           </p>
-                          <span className="inline-block mt-2 px-2 py-1 bg-slate-600/50 text-slate-300 text-xs font-medium rounded uppercase">
+                          <span className="inline-block mt-2 px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded uppercase border border-gray-200">
                             {getFileType(file.name)}
                           </span>
                         </div>
@@ -666,14 +664,14 @@ export default function ApplicationDetailPage() {
                       <div className="flex gap-2 mt-4">
                         <button
                           onClick={() => handleViewFile(file)}
-                          className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+                          className="flex-1 px-3 py-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 text-sm font-medium rounded-lg transition-colors"
                           title={getFileType(file.name) === 'pdf' ? 'Open in browser' : getFileType(file.name) === 'image' ? 'Preview' : 'Download'}
                         >
                           {getFileType(file.name) === 'pdf' ? '📄 View' : getFileType(file.name) === 'image' ? '👁️ Preview' : '📥 View'}
                         </button>
                         <button
                           onClick={() => handleDownload(file)}
-                          className="flex-1 px-3 py-2 bg-slate-600 hover:bg-slate-500 text-white text-sm font-medium rounded-lg transition-colors"
+                          className="flex-1 px-3 py-2 bg-gray-200 hover:bg-gray-300 text-gray-900 text-sm font-medium rounded-lg transition-colors"
                           title="Download file"
                         >
                           ⬇️ Download
@@ -688,19 +686,19 @@ export default function ApplicationDetailPage() {
 
           {/* RIGHT: Admin Actions Panel (1 column) */}
           <div className="lg:col-span-1">
-            <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 p-6 space-y-6 sticky top-6">
-              <h3 className="text-lg font-bold text-white">Admin Actions</h3>
+            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 space-y-6 sticky top-6">
+              <h3 className="text-lg font-bold text-gray-900">Admin Actions</h3>
 
               {/* Status Update Buttons */}
               <div className="space-y-3">
-                <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">
+                <p className="text-xs text-gray-600 font-medium uppercase tracking-wider">
                   Change Status
                 </p>
 
                 <button
                   onClick={() => handleStatusUpdate('under_review')}
                   disabled={application.status === 'under_review' || updating}
-                  className="w-full px-4 py-2 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all duration-200 hover:shadow-lg text-sm"
+                  className="w-full px-4 py-2 bg-amber-100 hover:bg-amber-200 disabled:opacity-50 disabled:cursor-not-allowed text-amber-900 font-semibold rounded-lg transition-all duration-200 hover:shadow-md text-sm border border-amber-300"
                 >
                   {updating ? '⏳ Updating...' : '⏱️ Under Review'}
                 </button>
@@ -708,7 +706,7 @@ export default function ApplicationDetailPage() {
                 <button
                   onClick={() => handleStatusUpdate('approved')}
                   disabled={application.status === 'approved' || updating}
-                  className="w-full px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all duration-200 hover:shadow-lg text-sm"
+                  className="w-full px-4 py-2 bg-green-100 hover:bg-green-200 disabled:opacity-50 disabled:cursor-not-allowed text-green-900 font-semibold rounded-lg transition-all duration-200 hover:shadow-md text-sm border border-green-300"
                 >
                   {updating ? '✅ Updating...' : '✅ Approve'}
                 </button>
@@ -716,17 +714,17 @@ export default function ApplicationDetailPage() {
                 <button
                   onClick={() => handleStatusUpdate('rejected')}
                   disabled={application.status === 'rejected' || updating}
-                  className="w-full px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all duration-200 hover:shadow-lg text-sm"
+                  className="w-full px-4 py-2 bg-red-100 hover:bg-red-200 disabled:opacity-50 disabled:cursor-not-allowed text-red-900 font-semibold rounded-lg transition-all duration-200 hover:shadow-md text-sm border border-red-300"
                 >
                   {updating ? '❌ Updating...' : '❌ Reject'}
                 </button>
               </div>
 
-              <div className="border-t border-slate-700/50"></div>
+              <div className="border-t border-gray-200"></div>
 
               {/* Message Box */}
               <div>
-                <label className="text-xs text-slate-400 font-medium uppercase tracking-wider mb-3 block">
+                <label className="text-xs text-gray-600 font-medium uppercase tracking-wider mb-3 block">
                   Message to Applicant
                 </label>
                 <textarea
@@ -735,12 +733,12 @@ export default function ApplicationDetailPage() {
                     setAdminAction(prev => ({ ...prev, message: e.target.value }))
                   }
                   placeholder="Write a message..."
-                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 resize-none"
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-200 resize-none"
                   rows={5}
                 />
               </div>
 
-              <button className="w-full px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg transition-all duration-200 hover:shadow-lg text-sm">
+              <button className="w-full px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold rounded-lg transition-all duration-200 hover:shadow-md text-sm">
                 💬 Send Message
               </button>
             </div>
@@ -748,8 +746,8 @@ export default function ApplicationDetailPage() {
         </div>
       ) : (
         !error && (
-          <div className="text-center py-12 bg-slate-700/20 border border-slate-600/50 rounded-lg">
-            <p className="text-slate-400 text-lg">No application data available</p>
+          <div className="text-center py-12 bg-gray-50 border border-gray-200 rounded-lg">
+            <p className="text-gray-600 text-lg">No application data available</p>
           </div>
         )
       )}
@@ -757,19 +755,19 @@ export default function ApplicationDetailPage() {
       {/* Image Preview Modal */}
       {previewImage && (
         <div
-          className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
+          className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50"
           onClick={() => setPreviewImage(null)}
         >
           <div
-            className="relative bg-slate-900 rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col"
+            className="relative bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-slate-700">
-              <p className="text-white font-semibold truncate pr-4">{previewImage.name}</p>
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <p className="text-gray-900 font-semibold truncate pr-4">{previewImage.name}</p>
               <button
                 onClick={() => setPreviewImage(null)}
-                className="text-slate-400 hover:text-white transition-colors flex-shrink-0"
+                className="text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
                 aria-label="Close preview"
               >
                 ✕
@@ -777,17 +775,17 @@ export default function ApplicationDetailPage() {
             </div>
 
             {/* Image Container */}
-            <div className="flex-1 overflow-auto flex items-center justify-center bg-black/40 p-4">
+            <div className="flex-1 overflow-auto flex items-center justify-center bg-gray-100 p-4">
               <img
                 src={previewImage.url}
                 alt={previewImage.name}
                 className="max-w-full max-h-full object-contain rounded-lg"
                 onError={() => (
-                  <div className="text-slate-400 text-center">
+                  <div className="text-gray-600 text-center">
                     <p className="mb-4">Failed to load image</p>
                     <button
                       onClick={() => handleDownload({ name: previewImage.name, url: previewImage.url })}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                      className="px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 rounded-lg font-medium"
                     >
                       Download Instead
                     </button>
@@ -797,16 +795,16 @@ export default function ApplicationDetailPage() {
             </div>
 
             {/* Footer */}
-            <div className="flex gap-3 p-6 border-t border-slate-700">
+            <div className="flex gap-3 p-6 border-t border-gray-200 bg-gray-50">
               <button
                 onClick={() => handleDownload({ name: previewImage.name, url: previewImage.url })}
-                className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+                className="flex-1 px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium rounded-lg transition-colors"
               >
                 ⬇️ Download
               </button>
               <button
                 onClick={() => setPreviewImage(null)}
-                className="flex-1 px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white font-medium rounded-lg transition-colors"
+                className="flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium rounded-lg transition-colors"
               >
                 Close
               </button>

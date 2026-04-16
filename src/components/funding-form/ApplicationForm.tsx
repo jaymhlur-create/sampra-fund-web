@@ -209,8 +209,8 @@ export default function ApplicationForm() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="spinner h-12 w-12 border-4"></div>
       </div>
     );
   }
@@ -227,14 +227,21 @@ export default function ApplicationForm() {
       : currentStep;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-gray-900">Funding Application</h1>
+        </div>
+      </header>
+
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+          <h2 className="text-4xl font-bold text-gray-900 mb-2">
             SAMPRA Funding Application
-          </h1>
-          <p className="text-slate-400">
+          </h2>
+          <p className="text-gray-600 text-lg">
             Complete all steps to submit your funding application
           </p>
         </div>
@@ -244,11 +251,11 @@ export default function ApplicationForm() {
 
         {/* Error Messages */}
         {errors.length > 0 && (
-          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-            <p className="text-red-300 font-medium mb-2">Please fix the following errors:</p>
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-red-900 font-bold mb-2">Please fix the following errors:</p>
             <ul className="space-y-1">
               {errors.map((error, idx) => (
-                <li key={idx} className="text-red-200 text-sm">
+                <li key={idx} className="text-red-700 text-sm">
                   • {error}
                 </li>
               ))}
@@ -257,7 +264,7 @@ export default function ApplicationForm() {
         )}
 
         {/* Form Card */}
-        <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 p-8 mb-8">
+        <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-8 mb-8">
           {/* Step 1 */}
           {currentStep === 1 && (
             <Step1ApplicantInfo
@@ -351,7 +358,7 @@ export default function ApplicationForm() {
           <button
             onClick={handlePrevStep}
             disabled={currentStep === 1}
-            className="px-6 py-3 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all duration-200"
+            className="px-6 py-3 bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed text-gray-900 font-bold rounded-full transition-all duration-200"
           >
             ← Previous
           </button>
@@ -359,7 +366,7 @@ export default function ApplicationForm() {
           <button
             onClick={currentStep === 8 ? handleSubmit : handleNextStep}
             disabled={isSubmitting}
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all duration-200 hover:shadow-lg"
+            className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {currentStep === 8
               ? isSubmitting
@@ -368,7 +375,7 @@ export default function ApplicationForm() {
               : 'Next →'}
           </button>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

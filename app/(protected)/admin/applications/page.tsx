@@ -125,149 +125,151 @@ export default function AdminApplicationsPage() {
   const getStatusColor = (status: string): string => {
     switch (status.toLowerCase()) {
       case 'submitted':
-        return 'bg-blue-500/20 text-blue-300 border border-blue-500/30';
+        return 'bg-blue-100 text-blue-800 border border-blue-300';
       case 'approved':
-        return 'bg-green-500/20 text-green-300 border border-green-500/30';
+        return 'bg-green-100 text-green-800 border border-green-300';
       case 'rejected':
-        return 'bg-red-500/20 text-red-300 border border-red-500/30';
+        return 'bg-red-100 text-red-800 border border-red-300';
       case 'draft':
-        return 'bg-slate-500/20 text-slate-300 border border-slate-500/30';
+        return 'bg-gray-100 text-gray-800 border border-gray-300';
       default:
-        return 'bg-slate-500/20 text-slate-300 border border-slate-500/30';
+        return 'bg-gray-100 text-gray-800 border border-gray-300';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
-      {/* Page Header */}
-      <div className="mb-8">
-        <Link
-          href="/admin"
-          className="text-blue-400 hover:text-blue-300 text-sm mb-4 inline-block"
-        >
-          ← Back to Admin Dashboard
-        </Link>
-        <h1 className="text-4xl font-bold text-white mb-2">Funding Applications</h1>
-        <p className="text-slate-400">View and manage all submitted funding applications</p>
-      </div>
-
-      {/* Error State */}
-      {error && (
-        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-          <p className="text-red-300 text-sm">
-            <span className="font-semibold">Error:</span> {error}
-          </p>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Link
+            href="/admin"
+            className="text-yellow-400 hover:text-yellow-500 text-sm font-semibold mb-4 inline-block transition-colors"
+          >
+            ← Back to Admin Dashboard
+          </Link>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Funding Applications</h1>
+          <p className="text-gray-600">View and manage all submitted funding applications</p>
         </div>
-      )}
+      </header>
 
-      {/* Loading State */}
-      {loading ? (
-        <div className="flex items-center justify-center py-12">
-          <div className="text-center">
-            <div className="inline-block animate-spin">
-              <div className="w-12 h-12 border-4 border-slate-600 border-t-blue-500 rounded-full"></div>
-            </div>
-            <p className="text-slate-400 mt-4">Loading applications...</p>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Error State */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-red-700 text-sm font-semibold">
+              <span className="font-bold">Error:</span> {error}
+            </p>
           </div>
-        </div>
-      ) : applications.length === 0 ? (
-        // Empty State
-        <div className="text-center py-12 bg-slate-700/20 border border-slate-600/50 rounded-lg">
-          <p className="text-slate-400 text-lg">No applications found</p>
-          <p className="text-slate-500 text-sm mt-2">
-            Submitted applications will appear here
-          </p>
-        </div>
-      ) : (
-        // Applications Table
-        <div className="overflow-x-auto rounded-lg border border-slate-600/50">
-          <table className="w-full">
-            {/* Table Header */}
-            <thead className="bg-slate-700/50 border-b border-slate-600/50">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-300">
-                  Application ID
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-300">
-                  Status
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-300">
-                  Total Budget
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-300">
-                  Submitted Date
-                </th>
-                <th className="px-6 py-4 text-center text-sm font-semibold text-slate-300">
-                  Action
-                </th>
-              </tr>
-            </thead>
+        )}
 
-            {/* Table Body */}
-            <tbody className="divide-y divide-slate-600/30">
-              {applications.map((application) => (
-                <tr
-                  key={application.id}
-                  className="hover:bg-slate-700/30 transition-colors"
-                >
-                  {/* Application ID */}
-                  <td className="px-6 py-4 text-sm">
-                    <div className="flex flex-col">
-                      <span className="font-mono text-blue-300 font-medium">
-                        {shortenId(application.id)}
-                      </span>
-                      <span className="text-xs text-slate-500 mt-1">
-                        {application.id}
-                      </span>
-                    </div>
-                  </td>
-
-                  {/* Status */}
-                  <td className="px-6 py-4 text-sm">
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                        application.status
-                      )}`}
-                    >
-                      {application.status.charAt(0).toUpperCase() +
-                        application.status.slice(1)}
-                    </span>
-                  </td>
-
-                  {/* Total Budget */}
-                  <td className="px-6 py-4 text-sm">
-                    <span className="text-blue-300 font-semibold">
-                      {formatCurrency(application.total_budget)}
-                    </span>
-                  </td>
-
-                  {/* Created Date */}
-                  <td className="px-6 py-4 text-sm text-slate-300">
-                    {formatDate(application.created_at)}
-                  </td>
-
-                  {/* View Button */}
-                  <td className="px-6 py-4 text-center">
-                    <button
-                      onClick={() => handleViewApplication(application.id)}
-                      className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg transition-all duration-200 hover:shadow-lg"
-                    >
-                      View
-                    </button>
-                  </td>
+        {/* Loading State */}
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <div className="text-center">
+              <div className="spinner h-12 w-12 border-4 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading applications...</p>
+            </div>
+          </div>
+        ) : applications.length === 0 ? (
+          // Empty State
+          <div className="text-center py-12 bg-gray-50 border border-gray-200 rounded-lg">
+            <p className="text-gray-700 text-lg font-medium">No applications found</p>
+            <p className="text-gray-600 text-sm mt-2">
+              Submitted applications will appear here
+            </p>
+          </div>
+        ) : (
+          // Applications Table
+          <div className="bg-white border border-gray-100 rounded-lg overflow-hidden">
+            <table className="w-full">
+              {/* Table Header */}
+              <thead className="bg-gray-50 border-b border-gray-100">
+                <tr>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                    Application ID
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                    Status
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                    Total Budget
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                    Submitted Date
+                  </th>
+                  <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">
+                    Action
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              </thead>
 
-      {/* Footer Info */}
-      {!loading && applications.length > 0 && (
-        <div className="mt-6 text-sm text-slate-400 text-center">
-          Total Applications: <span className="text-white font-semibold">{applications.length}</span>
-        </div>
-      )}
+              {/* Table Body */}
+              <tbody className="divide-y divide-gray-100">
+                {applications.map((application) => (
+                  <tr
+                    key={application.id}
+                    className="hover:bg-gray-50 transition-colors"
+                  >
+                    {/* Application ID */}
+                    <td className="px-6 py-4 text-sm">
+                      <div className="flex flex-col">
+                        <span className="font-mono text-gray-900 font-medium">
+                          {shortenId(application.id)}
+                        </span>
+                        <span className="text-xs text-gray-500 mt-1">
+                          {application.id}
+                        </span>
+                      </div>
+                    </td>
+
+                    {/* Status */}
+                    <td className="px-6 py-4 text-sm">
+                      <span
+                        className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                          application.status
+                        )}`}
+                      >
+                        {application.status.charAt(0).toUpperCase() +
+                          application.status.slice(1)}
+                      </span>
+                    </td>
+
+                    {/* Total Budget */}
+                    <td className="px-6 py-4 text-sm">
+                      <span className="text-gray-900 font-semibold">
+                        {formatCurrency(application.total_budget)}
+                      </span>
+                    </td>
+
+                    {/* Created Date */}
+                    <td className="px-6 py-4 text-sm text-gray-700">
+                      {formatDate(application.created_at)}
+                    </td>
+
+                    {/* View Button */}
+                    <td className="px-6 py-4 text-center">
+                      <button
+                        onClick={() => handleViewApplication(application.id)}
+                        className="px-4 py-2 text-sm font-semibold text-gray-900 bg-yellow-400 hover:bg-yellow-500 rounded-lg transition-colors"
+                      >
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Footer Info */}
+        {!loading && applications.length > 0 && (
+          <div className="mt-6 text-sm text-gray-600 text-center">
+            Total Applications: <span className="text-gray-900 font-semibold">{applications.length}</span>
+          </div>
+        )}
+      </main>
     </div>
   );
 }
