@@ -32,7 +32,7 @@ export default function Process() {
 
   return (
     <section className="py-16 lg:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-3xl py-12">
         <h2 className="text-4xl font-bold text-gray-900 text-center mb-4">
           Simple Application Process
         </h2>
@@ -47,8 +47,8 @@ export default function Process() {
 
               <div className="flex flex-col items-center text-center">
                 {/* Step number circle */}
-                <div className="w-16 h-16 rounded-full bg-gray-900 text-white flex items-center justify-center font-bold text-xl mb-4 relative z-10">
-                  {step.number}
+                <div className="w-16 h-16 rounded-full bg-blue-100 text-white flex items-center justify-center font-bold text-xl mb-4 relative z-10">
+                  {step.icon}
                 </div>
                 <h3 className="text-base font-semibold text-gray-900 mb-2">
                   {step.title}

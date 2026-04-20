@@ -8,22 +8,9 @@ export default function About() {
           {/* Left Illustration */}
           <div className="hidden lg:flex items-center justify-center">
             <div className="relative w-full h-80 flex items-center justify-center">
-              <svg
-                viewBox="0 0 200 200"
-                className="w-full h-full max-w-xs"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="100" cy="100" r="90" fill="none" stroke="#F59E0B" strokeWidth="3" opacity="0.3"/>
-                <circle cx="100" cy="100" r="70" fill="none" stroke="#10B981" strokeWidth="3" opacity="0.3"/>
-                <circle cx="100" cy="100" r="50" fill="none" stroke="#3B82F6" strokeWidth="3" opacity="0.3"/>
-
-                {/* Center musical note */}
-                <g transform="translate(100, 100)">
-                  <path d="M-8 -10 Q 0 -15 8 -10 L 8 10 Q 0 15 -8 10 Z" fill="#FCD34D"/>
-                  <circle cx="8" cy="12" r="6" fill="#FCD34D"/>
-                </g>
-              </svg>
+              <img
+                src="/Sampra-Logo-Titlesvg.svg"
+              />
             </div>
           </div>
 

@@ -11,7 +11,7 @@ export default function Header() {
         <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
           <div className="w-10 h-10 flex-shrink-0">
             <Image
-              src="/sampra-logo.svg"
+              src="/sampra-logo-color .svg"
               alt="SAMPRA Development Fund"
               width={40}
               height={40}
@@ -34,7 +34,7 @@ export default function Header() {
           </Link>
           <Link
             href="/signup"
-            className="text-sm font-semibold text-white bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded-full transition-colors"
+            className="text-sm font-semibold text-black bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded-full transition-colors"
           >
             SIGN UP
           </Link>

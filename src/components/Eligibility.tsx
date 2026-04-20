@@ -12,7 +12,7 @@ export default function Eligibility() {
   ];
 
   return (
-    <section className="py-16 lg:py-20 bg-yellow-50">
+    <section className="py-16 lg:py-20 bg-yellow-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -44,30 +44,11 @@ export default function Eligibility() {
           {/* Right Illustration */}
           <div className="hidden lg:flex items-center justify-center">
             <div className="relative w-full h-96 flex items-center justify-center">
-              <svg
-                viewBox="0 0 300 400"
-                className="w-full h-full max-w-xs"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Person with guitar */}
-                <circle cx="100" cy="60" r="20" fill="#8B6F47"/>
-                <path d="M100 80 L100 140"/>
-                <path d="M80 100 L120 100"/>
-                <path d="M100 140 L85 180"/>
-                <path d="M100 140 L115 180"/>
-
-                {/* Guitar */}
-                <ellipse cx="140" cy="110" rx="15" ry="30" fill="none" stroke="#D97706" strokeWidth="3"/>
-                <rect x="135" y="95" width="10" height="50" fill="#D97706" opacity="0.3"/>
-
-                {/* Decorative dots for other people */}
-                <circle cx="60" cy="220" r="3" fill="#FCD34D"/>
-                <circle cx="90" cy="280" r="3" fill="#FCD34D"/>
-                <circle cx="150" cy="240" r="3" fill="#FCD34D"/>
-                <circle cx="200" cy="290" r="3" fill="#FCD34D"/>
-                <circle cx="220" cy="180" r="3" fill="#FCD34D"/>
-              </svg>
+              <img
+                src="/GuitarLady.svg"
+                alt="Guitar Lady"
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
         </div>

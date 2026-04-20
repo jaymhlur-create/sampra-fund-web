@@ -43,33 +43,11 @@ export default function Hero() {
           <div className="hidden lg:flex items-center justify-center">
             <div className="relative w-full h-96 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl flex items-center justify-center overflow-hidden">
               {/* Placeholder for illustration - creative silhouettes */}
-              <svg
-                viewBox="0 0 300 400"
-                className="w-full h-full max-w-xs"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Singer silhouette */}
-                <circle cx="120" cy="80" r="25" fill="#8B6F47"/>
-                <path d="M120 105 Q110 140 100 180 M120 115 Q115 150 110 180 M120 115 Q125 150 130 180" stroke="#F59E0B" strokeWidth="8" strokeLinecap="round"/>
-                <circle cx="90" cy="100" r="12" fill="#FCD34D"/>
-                <circle cx="150" cy="140" r="30" fill="#060D47" opacity="0.1"/>
-
-                {/* Person with laptop silhouette */}
-                <circle cx="220" cy="120" r="20" fill="#1E3A8A"/>
-                <rect x="200" y="150" width="40" height="60" fill="#1E3A8A"/>
-                <rect x="190" y="160" width="60" height="40" fill="#3B82F6" rx="4"/>
-
-                {/* Musical notes */}
-                <g stroke="#FCD34D" strokeWidth="3" fill="none">
-                  <path d="M60 200 Q70 180 80 200"/>
-                  <path d="M160 250 Q175 220 190 250"/>
-                </g>
-
-                {/* Decorative elements */}
-                <circle cx="250" cy="200" r="8" fill="#FCD34D"/>
-                <circle cx="80" cy="300" r="10" fill="#FEF3C7" opacity="0.6"/>
-              </svg>
+              <img
+                src ="/singingLady.svg"
+                alt="Singing Lady"
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
         </div>

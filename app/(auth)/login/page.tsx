@@ -57,22 +57,20 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-50 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <div className="w-10 h-10 flex-shrink-0">
-              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="100" r="95" fill="none" stroke="#FEC838" strokeWidth="8"/>
-                <g transform="translate(100, 100)">
-                  <rect x="-70" y="-25" width="6" height="15" fill="#FEC838" rx="3"/>
-                  <rect x="-58" y="-30" width="6" height="20" fill="#FEC838" rx="3"/>
-                  <rect x="-46" y="-28" width="6" height="18" fill="#FEC838" rx="3"/>
-                  <line x1="-80" y1="0" x2="80" y2="0" stroke="#FEC838" strokeWidth="4" strokeLinecap="round"/>
-                </g>
-              </svg>
+             <img
+              src = "/sampra-logo.svg"
+             />
             </div>
+             <div className="hidden sm:block">
+            <h1 className="text-lg font-bold text-gray-900">sampra</h1>
+            <p className="text-xs text-gray-500 font-medium">DEVELOPMENT FUND</p>
+          </div>
           </Link>
-          <Link href="/signup" className="text-sm font-semibold text-white bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded-full transition-colors">
+          <Link href="/signup" className="text-sm font-semibold text-black bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded-full transition-colors">
             SIGN UP
           </Link>
         </div>
