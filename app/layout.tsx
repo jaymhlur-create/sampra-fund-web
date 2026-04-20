@@ -29,8 +29,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SAMPRA Development Fund - Funding Music & Culture in South Africa",
+  title: "SAMPRA Development Fund",
   description: "Access funding, development programs, and opportunities to grow your creative career. We support artists, creators, and organisations across South Africa.",
+  icons: {
+    icon: "/sampra-logo-color .svg",
+  },
 };
 
 export default function RootLayout({
