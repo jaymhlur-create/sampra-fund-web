@@ -7,21 +7,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary Brand Color
         'sampra-yellow': {
           50: '#FFFBF0',
           100: '#FEF3E2',
           200: '#FEE5C3',
           300: '#FED89A',
-          400: '#FEC838', // Primary
-          500: '#F59E0B', // Dark variant
+          400: '#FEC838',
+          500: '#F59E0B',
           600: '#D97706',
           700: '#B45309',
           800: '#92400E',
           900: '#78350F',
         },
-
-        // Semantic Colors
         'success': {
           50: '#F0FDF4',
           100: '#DCFCE7',
@@ -34,7 +31,6 @@ module.exports = {
           800: '#166534',
           900: '#145231',
         },
-
         'warning': {
           50: '#FFFBEB',
           100: '#FEF3C7',
@@ -47,7 +43,6 @@ module.exports = {
           800: '#92400E',
           900: '#78350F',
         },
-
         'danger': {
           50: '#FEF2F2',
           100: '#FEE2E2',
@@ -60,7 +55,6 @@ module.exports = {
           800: '#991B1B',
           900: '#7F1D1D',
         },
-
         'info': {
           50: '#F0F9FF',
           100: '#E0F2FE',
@@ -73,8 +67,6 @@ module.exports = {
           800: '#075985',
           900: '#0C3D6E',
         },
-
-        // Neutral Colors
         'neutral': {
           50: '#FAFAFA',
           100: '#F5F5F5',
@@ -90,17 +82,16 @@ module.exports = {
       },
 
       fontSize: {
-        // Typography Sizes
-        'xs': ['0.75rem', { lineHeight: '1rem' }],       // 12px
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }],   // 14px
-        'base': ['1rem', { lineHeight: '1.5rem' }],      // 16px
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }],   // 18px
-        'xl': ['1.25rem', { lineHeight: '1.75rem' }],    // 20px
-        '2xl': ['1.5rem', { lineHeight: '2rem' }],       // 24px
-        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],  // 30px
-        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],    // 36px
-        '5xl': ['3rem', { lineHeight: '1.2' }],          // 48px
-        '6xl': ['3.75rem', { lineHeight: '1.2' }],       // 60px
+        'xs': ['0.75rem', { lineHeight: '1rem' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'base': ['1rem', { lineHeight: '1.5rem' }],
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+        '5xl': ['3rem', { lineHeight: '1.2' }],
+        '6xl': ['3.75rem', { lineHeight: '1.2' }],
       },
 
       fontWeight: {
@@ -113,7 +104,6 @@ module.exports = {
       },
 
       spacing: {
-        // Additional spacing values if needed
         '0': '0px',
         '1': '0.25rem',
         '2': '0.5rem',
@@ -131,7 +121,7 @@ module.exports = {
       },
 
       maxWidth: {
-        'container': '1280px',  // max-w-7xl equivalent
+        'container': '1280px',
       },
 
       borderRadius: {
@@ -147,10 +137,10 @@ module.exports = {
 
       shadows: {
         'sm': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-        'base': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-        'md': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-        'lg': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-        'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+        'base': '0 1px 3px 0 rgb(0 0 0 / 0.1)',
+        'md': '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+        'lg': '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+        'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1)',
       },
 
       boxShadow: {
@@ -166,11 +156,24 @@ module.exports = {
         '12': '3rem',
       },
 
+      // ✅ ADD THIS SECTION
+      keyframes: {
+        bounceIn: {
+          '0%': { transform: 'scale(1.2)', opacity: '0' },
+          '50%': { transform: 'scale(0.9)' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+      },
+
       animation: {
         'spin': 'spin 1s linear infinite',
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+
+        // ✅ ADD THIS
+        'bounce-in': 'bounceIn 0.6s ease-out forwards',
       },
     },
   },
+
   plugins: [],
 };
