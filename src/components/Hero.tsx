@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import Link from 'next/link';
 
-// ✅ Parent controls stagger timing
-const container = {
+// Parent controls stagger timing
+const container: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -14,8 +15,8 @@ const container = {
   },
 };
 
-// ✅ Each item animates in sequence
-const item = {
+// Each item animates in sequence
+const item: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,

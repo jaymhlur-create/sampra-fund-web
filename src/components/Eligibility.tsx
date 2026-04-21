@@ -1,9 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import Link from 'next/link';
 
-const container = {
+const container: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -13,7 +14,7 @@ const container = {
   },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 25 },
   show: {
     opacity: 1,
@@ -60,14 +61,14 @@ export default function Eligibility() {
             </motion.p>
 
             {/* LIST */}
-            <motion.ul className="space-y-4 mb-8" variants={item}>
+            <motion.ul className="space-y-4 mb-8">
               {categories.map((category, idx) => (
                 <motion.li
                   key={idx}
                   className="flex items-center space-x-3"
                   variants={item}
                 >
-                  <span className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0" />
                   <span className="text-gray-700 font-medium">
                     {category}
                   </span>
