@@ -162,7 +162,7 @@ export default function SignupPage() {
                 href="/login"
                 className="text-yellow-400 hover:text-yellow-500 font-semibold transition-colors"
               >
-                Sign in instead
+                Log in instead
               </Link>
             </div>
           </div>

@@ -19,6 +19,7 @@ export async function signUp(email: string, password: string) {
 
   if (error) throw new Error(error.message);
 
+  // ⚠️ TEMP: keep this for testing (we may REMOVE it after)
   if (data?.user) {
     await ensureUserProfile(data.user);
   }
@@ -34,6 +35,7 @@ export async function signIn(email: string, password: string) {
 
   if (error) throw new Error(error.message);
 
+  // ⚠️ TEMP: keep this for testing (we may REMOVE it after)
   if (data?.user) {
     await ensureUserProfile(data.user);
   }
@@ -71,10 +73,9 @@ export async function getUserProfile(userId: string) {
     .eq('id', userId)
     .single();
 
-  // ✅ FIX: Handle "no row found" silently
   if (error) {
     if (error.code === 'PGRST116') {
-      return null; // normal case → profile not created yet
+      return null;
     }
 
     console.error('getUserProfile error:', error);
@@ -85,71 +86,56 @@ export async function getUserProfile(userId: string) {
 }
 
 // -------------------------------
-// CREATE PROFILE (ROBUST)
+// CREATE PROFILE (DEBUG VERSION)
 // -------------------------------
 export async function createUserProfile(user: User) {
+  // 🔍 DEBUG SESSION
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+  console.log("SESSION DATA:", sessionData);
+  console.log("SESSION ERROR:", sessionError);
+  console.log("Auth User ID:", user?.id);
+
   const email = user.email?.toLowerCase();
   const isGodAdmin = email === GOD_ADMIN_EMAIL;
 
+  // 🚨 TEMP: use INSERT instead of UPSERT
   const { data, error } = await supabase
     .from('profiles')
-    .upsert(
+    .insert([
       {
         id: user.id,
         email,
         role: isGodAdmin ? 'admin' : 'user',
-        created_at: new Date().toISOString(),
-      },
-      { onConflict: 'id' }
-    );
+      }
+    ]);
 
-  if (error) {
-    console.error('createUserProfile error:', error);
-    return null;
-  }
+  console.log("INSERT DATA:", data);
+  console.log("INSERT ERROR:", JSON.stringify(error, null, 2));
+
+  if (error) return null;
 
   return data;
 }
 
 // -------------------------------
-// ENSURE PROFILE (FINAL FIX)
+// ENSURE PROFILE
 // -------------------------------
 export async function ensureUserProfile(user: User) {
   if (!user?.id) return null;
 
-  const email = user.email?.toLowerCase();
-  const isGodAdmin = email === GOD_ADMIN_EMAIL;
-
   let profile = await getUserProfile(user.id);
 
-  // ✅ If profile doesn't exist → create it
   if (!profile) {
     await createUserProfile(user);
     profile = await getUserProfile(user.id);
-  }
-
-  // 🔥 Always enforce correct role
-  if (profile) {
-    if (isGodAdmin && profile.role !== 'admin') {
-      await supabase
-        .from('profiles')
-        .update({ role: 'admin' })
-        .eq('id', user.id);
-    }
-
-    if (!isGodAdmin && profile.role === 'admin') {
-      await supabase
-        .from('profiles')
-        .update({ role: 'user' })
-        .eq('id', user.id);
-    }
   }
 
   return profile;
 }
 
 // ==================================================
-// ADMIN FUNCTIONS
+// ADMIN FUNCTIONS (unchanged)
 // ==================================================
 
 export async function getAllProfiles() {
@@ -171,9 +157,6 @@ export async function getAllProfiles() {
   }
 }
 
-// -------------------------------
-// UPDATE ROLE (SAFE)
-// -------------------------------
 export async function updateUserRole(userId: string, newRole: 'user' | 'admin') {
   const profile = await getUserProfile(userId);
 

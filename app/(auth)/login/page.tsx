@@ -6,29 +6,29 @@ import Link from 'next/link'
 import { signIn } from '@/src/lib/auth'
 import { useAuth } from '@/src/context/AuthContext'
 
-/**
- * Login Page
- * Route: /login
- *
- * CLEAN SAAS FLOW:
- * - Users land here from landing page
- * - Users manually sign in
- * - No auto-redirect loop
- */
-
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
   const { user, loading } = useAuth()
   const router = useRouter()
+
+  // ✅ FIX: handle redirect safely
+  useEffect(() => {
+    if (user) {
+      router.replace('/dashboard')
+    }
+  }, [user, router])
 
   const handleLogin = async () => {
     if (!email || !password) {
       alert('Please enter email and password')
       return
     }
+
     setIsLoading(true)
+
     try {
       await signIn(email, password)
       router.replace('/dashboard')
@@ -48,12 +48,6 @@ export default function LoginPage() {
     )
   }
 
-  // If already logged in, redirect
-  if (user) {
-    router.replace('/dashboard')
-    return null
-  }
-
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -61,25 +55,24 @@ export default function LoginPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <div className="w-10 h-10 flex-shrink-0">
-             <img
-              src = "/sampra-logo.svg"
-             />
+              <img src="/sampra-logo.svg" />
             </div>
-             <div className="hidden sm:block">
-            <h1 className="text-lg font-bold text-gray-900">sampra</h1>
-            <p className="text-xs text-gray-500 font-medium">DEVELOPMENT FUND</p>
-          </div>
+            <div className="hidden sm:block">
+              <h1 className="text-lg font-bold text-gray-900">sampra</h1>
+              <p className="text-xs text-gray-500 font-medium">DEVELOPMENT FUND</p>
+            </div>
           </Link>
+
           <Link href="/signup" className="text-sm font-semibold text-black bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded-full transition-colors">
             SIGN UP
           </Link>
         </div>
       </header>
-      
+
       <main className="flex items-center justify-center px-4 py-12 lg:py-20">
         <div className="w-full max-w-md">
           <div className="bg-white border border-gray-100 rounded-2xl shadow-md p-8 space-y-6">
-            
+
             {/* Header */}
             <div className="space-y-2 text-center">
               <h1 className="text-4xl font-bold text-gray-900">
@@ -127,8 +120,16 @@ export default function LoginPage() {
               disabled={isLoading}
               className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Signing In...' : 'Sign In'}
+              {isLoading ? 'Logging In...' : 'Log In'}
             </button>
+
+            {/* ✅ FIXED LINK */}
+            <Link
+              href="/auth/forgot-password"
+              className="text-sm text-gray-900 hover:text-yellow-500 font-medium transition-colors block text-center"
+            >
+              Forgot your password?
+            </Link>
 
             {/* Divider */}
             <div className="relative">
