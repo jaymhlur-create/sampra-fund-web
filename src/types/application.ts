@@ -3,11 +3,17 @@
  * Defines the complete data structure for the funding application
  */
 
+export interface UploadedFile {
+  name: string;
+  url: string;
+  path: string;
+}
+
 export interface Quotation {
   id: string; // UUID or unique identifier
   quotation_name: string;
-  quotation_amount: number | string; // Can be string during input or number for calculation
-  quotation_file: File | null;
+  quotation_amount: number | string;
+  quotation_file: UploadedFile | null;
 }
 
 export interface ApplicationData {
@@ -24,7 +30,7 @@ export interface ApplicationData {
   step2: {
     company_name: string;
     cipc_registration_number: string;
-    cipc_document_upload: File | null;
+    cipc_document_upload: UploadedFile | null;
     directors: string;
     company_postal_address: string;
     company_physical_address: string;
@@ -32,7 +38,13 @@ export interface ApplicationData {
 
   // Step 3 - Application Type
   step3: {
-    application_type: 'Music Production' | 'Travel and Touring' | 'Festivals and Concerts' | 'Musicals' | 'Cultural Organizations' | '';
+    application_type:
+      | 'Music Production'
+      | 'Travel and Touring'
+      | 'Festivals and Concerts'
+      | 'Musicals'
+      | 'Cultural Organizations'
+      | '';
   };
 
   // Step 4 - Event Details
@@ -55,8 +67,8 @@ export interface ApplicationData {
 
   // Step 6 - Document Uploads
   step6: {
-    applicant_id_document: File | null;
-    additional_documents: File[];
+    applicant_id_document: UploadedFile | null;
+    additional_documents: UploadedFile[];
   };
 
   // Step 7 - Quotations
@@ -85,6 +97,7 @@ export const initialApplicationData: ApplicationData = {
     alternate_number: '',
     applying_as: '',
   },
+
   step2: {
     company_name: '',
     cipc_registration_number: '',
@@ -93,9 +106,11 @@ export const initialApplicationData: ApplicationData = {
     company_postal_address: '',
     company_physical_address: '',
   },
+
   step3: {
     application_type: '',
   },
+
   step4: {
     event_name: '',
     event_date: '',
@@ -103,6 +118,7 @@ export const initialApplicationData: ApplicationData = {
     sampra_license: '',
     estimated_attendance: '',
   },
+
   step5: {
     about_applicant: '',
     project_concept: '',
@@ -110,10 +126,12 @@ export const initialApplicationData: ApplicationData = {
     project_timeline: '',
     marketing_plan_roi: '',
   },
+
   step6: {
     applicant_id_document: null,
     additional_documents: [],
   },
+
   step7: {
     quotations: [],
   },

@@ -1,27 +1,27 @@
 'use client';
 
-import { ApplicationData, STEPS } from '@/src/types/application';
+import { ApplicationData } from '@/src/types/application';
 
 interface Step8ReviewSubmitProps {
   data: ApplicationData;
   onEdit: (step: number) => void;
-  onSubmit: () => void;
+  onSubmit: () => Promise<void> | void;
   isSubmitting?: boolean;
 }
 
-/**
- * Step 8 - Review & Submit
- * Final review of all entered data with edit capabilities
- */
 export default function Step8ReviewSubmit({
   data,
   onEdit,
   onSubmit,
   isSubmitting = false,
 }: Step8ReviewSubmitProps) {
-  // Calculate total from quotations
-  const quotationTotal = data.step7.quotations.reduce(
-    (sum, q) => sum + (Number(q.quotation_amount) || 0),
+
+  // 🔥 SAFETY GUARD (prevents crashes if step7 is undefined)
+  const quotations = data.step7?.quotations || [];
+
+  // Calculate total safely
+  const quotationTotal = quotations.reduce(
+    (sum, q) => sum + (Number(q?.quotation_amount) || 0),
     0
   );
 
@@ -55,131 +55,110 @@ export default function Step8ReviewSubmit({
         {value === null || value === undefined || value === ''
           ? '—'
           : typeof value === 'boolean'
-          ? value
-            ? 'Yes'
-            : 'No'
+          ? value ? 'Yes' : 'No'
           : String(value)}
       </span>
     </div>
   );
 
+  // 🔥 HARD VALIDATION BEFORE SUBMIT
+  const handleSubmit = async () => {
+    try {
+      console.log('🚀 SUBMIT START');
+      console.log('📦 Full application data:', data);
+      console.log("step 8 clicked")
+
+      // 🧠 VALIDATION: ID DOCUMENT
+      if (!data.step6?.applicant_id_document?.url) {
+        alert('Applicant ID Document is required');
+        return;
+      }
+
+      // 🧠 VALIDATION: must have at least 1 quotation
+      if (quotations.length === 0) {
+        alert('At least one quotation is required');
+        return;
+      }
+
+      console.log('✅ Validation passed, submitting...');
+
+      await onSubmit();
+
+      console.log('✅ Submit completed successfully');
+      console.log('✅ onSubmit completed, waiting for response...');
+    } catch (error) {
+      console.error('❌ Submit failed:', error);
+    }
+  };
+
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Review Your Application</h2>
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+        Review Your Application
+      </h2>
 
-      {/* Step 1 - Applicant Info */}
+      {/* Step 1 */}
       <ReviewSection step={1} title="Applicant Information">
-        <ReviewItem label="Name & Surname" value={data.step1.name_surname} />
-        <ReviewItem label="Email" value={data.step1.email} />
-        <ReviewItem label="Contact Number" value={data.step1.contact_number} />
-        <ReviewItem label="Alternate Number" value={data.step1.alternate_number || '—'} />
-        <ReviewItem label="Applying As" value={data.step1.applying_as} />
+        <ReviewItem label="Name & Surname" value={data.step1?.name_surname} />
+        <ReviewItem label="Email" value={data.step1?.email} />
+        <ReviewItem label="Contact Number" value={data.step1?.contact_number} />
+        <ReviewItem label="Alternate Number" value={data.step1?.alternate_number || '—'} />
+        <ReviewItem label="Applying As" value={data.step1?.applying_as} />
       </ReviewSection>
 
-      {/* Step 2 - Company Info (if applicable) */}
-      {data.step1.applying_as === 'Company' && (
-        <ReviewSection step={2} title="Company Information">
-          <ReviewItem label="Company Name" value={data.step2.company_name} />
-          <ReviewItem label="CIPC Number" value={data.step2.cipc_registration_number} />
-          <ReviewItem label="Directors" value={data.step2.directors || '—'} />
-          <ReviewItem label="Postal Address" value={data.step2.company_postal_address} />
-          <ReviewItem label="Physical Address" value={data.step2.company_physical_address} />
-          {data.step2.cipc_document_upload && (
-            <ReviewItem
-              label="CIPC Document"
-              value={`📎 ${data.step2.cipc_document_upload.name}`}
-            />
-          )}
-        </ReviewSection>
-      )}
-
-      {/* Step 3 - Application Type */}
-      <ReviewSection step={3} title="Application Type">
-        <ReviewItem label="Application Type" value={data.step3.application_type} />
-      </ReviewSection>
-
-      {/* Step 4 - Event Details */}
-      <ReviewSection step={4} title="Event Details">
-        <ReviewItem label="Event Name" value={data.step4.event_name} />
-        <ReviewItem label="Event Date" value={data.step4.event_date} />
-        <ReviewItem label="Venue" value={data.step4.venue} />
-        <ReviewItem label="SAMPRA License" value={data.step4.sampra_license} />
-        <ReviewItem label="Estimated Attendance" value={data.step4.estimated_attendance} />
-      </ReviewSection>
-
-      {/* Step 5 - Project Info */}
+      {/* Step 5 (FIXED DISPLAY SAFETY) */}
       <ReviewSection step={5} title="Project Information">
-        <div className="space-y-3">
-          <div>
-            <p className="text-sm text-gray-400 font-medium">About You:</p>
-            <p className="text-gray-200 text-sm mt-1">{data.step5.about_applicant || '—'}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-400 font-medium">Project Concept:</p>
-            <p className="text-gray-200 text-sm mt-1">{data.step5.project_concept || '—'}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-400 font-medium">Previous Experience:</p>
-            <p className="text-gray-200 text-sm mt-1">
-              {data.step5.previous_events_history || '—'}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-400 font-medium">Project Timeline:</p>
-            <p className="text-gray-200 text-sm mt-1">{data.step5.project_timeline || '—'}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-400 font-medium">Marketing Plan & ROI:</p>
-            <p className="text-gray-200 text-sm mt-1">{data.step5.marketing_plan_roi || '—'}</p>
-          </div>
-        </div>
+        <ReviewItem label="About Applicant" value={data.step5?.about_applicant} />
+        <ReviewItem label="Project Concept" value={data.step5?.project_concept} />
+        <ReviewItem label="Previous Experience" value={data.step5?.previous_events_history} />
+        <ReviewItem label="Marketing & ROI" value={data.step5?.marketing_plan_roi} />
       </ReviewSection>
 
-      {/* Step 6 - Documents */}
+      {/* Step 6 */}
       <ReviewSection step={6} title="Documents">
-        {data.step6.applicant_id_document ? (
+        {data.step6?.applicant_id_document?.name ? (
           <p className="text-gray-200 text-sm">
-            📎 ID Document: <span className="font-medium">{data.step6.applicant_id_document.name}</span>
+            📎 ID Document:{' '}
+            <span className="font-medium">
+              {data.step6.applicant_id_document.name}
+            </span>
           </p>
         ) : (
-          <p className="text-red-400 text-sm">⚠️ No ID document uploaded</p>
-        )}
-        {data.step6.additional_documents.length > 0 && (
-          <div className="mt-3">
-            <p className="text-gray-400 text-sm font-medium">Additional Documents:</p>
-            <ul className="text-gray-300 text-sm mt-1 space-y-1">
-              {data.step6.additional_documents.map((doc, idx) => (
-                <li key={idx}>📎 {doc.name}</li>
-              ))}
-            </ul>
-          </div>
+          <p className="text-red-400 text-sm">
+            ⚠️ No ID document uploaded
+          </p>
         )}
       </ReviewSection>
 
-      {/* Step 7 - Quotations */}
+      {/* Step 7 */}
       <ReviewSection step={7} title="Budget Quotations">
-        {data.step7.quotations.length === 0 ? (
-          <p className="text-gray-300 text-sm italic">No quotations added</p>
+        {quotations.length === 0 ? (
+          <p className="text-gray-300 text-sm italic">
+            No quotations added
+          </p>
         ) : (
           <>
-            <div className="space-y-2">
-              {data.step7.quotations.map((q) => (
-                <div
-                  key={q.id}
-                  className="flex items-center justify-between py-2 border-b border-slate-600/30"
-                >
-                  <span className="text-gray-300">{q.quotation_name || 'Unnamed'}</span>
-                  <span className="text-gray-200 font-medium">
-                    R {Number(q.quotation_amount).toLocaleString('en-ZA', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="flex items-center justify-between py-3 bg-gray-700/50 px-3 rounded -mx-6 px-6 mt-4">
-              <span className="text-white font-semibold">Total Budget:</span>
+            {quotations.map((q) => (
+              <div
+                key={q.id}
+                className="flex justify-between py-2 border-b border-slate-600/30"
+              >
+                <span className="text-gray-300">
+                  {q.quotation_name || 'Unnamed'}
+                </span>
+                <span className="text-gray-200 font-medium">
+                  R {Number(q.quotation_amount || 0).toLocaleString('en-ZA', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
+              </div>
+            ))}
+
+            <div className="flex justify-between py-3 bg-gray-700/50 px-3 rounded mt-4">
+              <span className="text-white font-semibold">
+                Total Budget:
+              </span>
               <span className="text-xl font-bold text-blue-400">
                 R {quotationTotal.toLocaleString('en-ZA', {
                   minimumFractionDigits: 2,
@@ -191,13 +170,14 @@ export default function Step8ReviewSubmit({
         )}
       </ReviewSection>
 
-      {/* Submit Section */}
+      {/* Submit */}
       <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-6 mt-8">
         <p className="text-sm text-blue-300 mb-4">
-          ✓ All information has been reviewed. Click "Submit Application" to proceed with your submission.
+          ✓ All information has been reviewed.
         </p>
+
         <button
-          onClick={onSubmit}
+          onClick={handleSubmit}
           disabled={isSubmitting}
           className="w-full py-3 px-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all duration-200 hover:shadow-lg"
         >

@@ -59,7 +59,7 @@ export default function Step4EventDetails({ data, onChange }: Step4EventDetailsP
 
       {/* SAMPRA License */}
       <div>
-        <label className="block text-sm font-semibold text-gray-900 mb-3">
+        <label className="block text-sm font-semibold text-black mb-3">
           Do you have a SAMPRA License? *
         </label>
         <div className="space-y-2">
